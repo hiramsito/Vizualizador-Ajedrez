@@ -1,0 +1,43 @@
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  height: 100px;
+}
+
+td {
+  border: 3px solid;
+  width: 100px;
+}
+
+tr:nth-child(even) td:nth-child(even),
+tr:nth-child(odd) td:nth-child(odd) {
+  background: rgb(254, 255, 187);
+}
+
+tr:nth-child(odd) td:nth-child(even),
+tr:nth-child(even) td:nth-child(odd) {
+  background: rgb(101, 65, 65);
+}
+
+/*Le da estilo a los renglones de letras*/
+table tr:first-child td,
+tr:last-child td {
+  background-color: #fcfce3 !important ;
+  border: none;
+  border-left: none;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+}
+/*Le da estilo a las columnas de números*/
+table td:first-child,
+td:last-child {
+  background: #fcfce3 !important ;
+  border: none;
+  border-left: none;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+}
