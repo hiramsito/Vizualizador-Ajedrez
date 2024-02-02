@@ -1,5 +1,6 @@
 table {
   border-collapse: collapse;
+  display: inline;
 }
 
 tr {
@@ -40,4 +41,43 @@ td:last-child {
   text-align: center;
   font-weight: bold;
   font-size: 2em;
+}
+
+div {
+  display: inline;
+}
+
+select {
+  font-size: 2em;
+  margin-right: 2em;
+  margin-bottom: 2px;
+}
+
+
+.controles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:flex-start ;
+  margin-left: 20px;
+}
+
+.comboBox select {
+  font-size: 2em;
+  margin-right: 2em;
+}
+
+.textArea textarea {
+  width: 100%;
+}
+
+.botones button {
+  font-size: 2em;
+  margin-right: 10px;
+}
+
+.contenedor{
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Para centrar horizontalmente en la página */
 }
