@@ -1,3 +1,5 @@
+var contadorPaso = 0;
+
 function iniciar() {
   var celdas = document.getElementById("Tablero");
   /* Cargar imagenes en el tablero */
@@ -85,4 +87,34 @@ function partidas() {
     default:
       break;
   }
+}
+
+function cargarPartida() {
+  var archivo = document.getElementById("cargarBoton").files[0];
+  var scanner = new FileReader();
+
+  scanner.onload = function (e) {
+    document.getElementById("texto").value = e.target.result;
+    // document.getElementById("texto").value = document.getElementById("cargarBoton").files;
+  };
+
+  scanner.readAsText(archivo);
+}
+
+function pasoAPaso() {
+  var celdas = document.getElementById("Tablero");
+  celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
+  celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
+  switch(contadorPaso){
+    case 0:
+      celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
+      celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
+      break;
+    case 1:
+      celdas.rows[2].cells[2].style = "background-image: none; background-size:cover;";
+      celdas.rows[3].cells[2].style = "background-image: url(./img/PeonN.png); background-size:cover;";
+      break;
+  }
+  contadorPaso++;
+  console.log(contadorPaso);
 }
