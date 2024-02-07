@@ -102,19 +102,29 @@ function cargarPartida() {
 }
 
 function pasoAPaso() {
-  var celdas = document.getElementById("Tablero");
-  celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
-  celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-  switch(contadorPaso){
-    case 0:
-      celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
-      celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-      break;
-    case 1:
-      celdas.rows[2].cells[2].style = "background-image: none; background-size:cover;";
-      celdas.rows[3].cells[2].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-      break;
+  var celdas = document.getElementById("texto").value;
+
+  // celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
+  // celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
+  // switch(contadorPaso){
+  //   case 0:
+  //     celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
+  //     celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
+  //     break;
+  //   case 1:
+  //     celdas.rows[2].cells[2].style = "background-image: none; background-size:cover;";
+  //     celdas.rows[3].cells[2].style = "background-image: url(./img/PeonN.png); background-size:cover;";
+  //     break;
+  // }
+  // contadorPaso++;
+  // console.log(contadorPaso);
+
+  var lineas = celdas.split("\n");
+  for (let i = 0; i < lineas.length; i++) {
+    // alert(lineas[i]);
+    var tokens = lineas[i].split(" ");
+    for (let j = 1; j < tokens.length; j++) {
+      alert(tokens[j]);
+    }
   }
-  contadorPaso++;
-  console.log(contadorPaso);
 }
