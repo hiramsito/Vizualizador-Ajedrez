@@ -14,12 +14,12 @@ td {
 
 tr:nth-child(even) td:nth-child(even),
 tr:nth-child(odd) td:nth-child(odd) {
-  background: rgb(254, 255, 187);
+  background: rgb(214, 195, 83);
 }
 
 tr:nth-child(odd) td:nth-child(even),
 tr:nth-child(even) td:nth-child(odd) {
-  background: rgb(101, 65, 65);
+  background: rgb(163, 139, 0);
 }
 
 /*Le da estilo a los renglones de letras*/
@@ -76,8 +76,12 @@ select {
   margin-right: 10px;
 }
 
+.textoArea{
+  font-size: 2em;
+}
+
 .contenedor{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center; /* Para centrar horizontalmente en la página */
 }

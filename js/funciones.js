@@ -43,9 +43,9 @@ function iniciar() {
   celdas.rows[8].cells[3].style =
     "background-image: url(./img/AlfilB.png); background-size: cover;";
   celdas.rows[8].cells[4].style =
-    "background-image: url(./img/ReyB.png); background-size: cover;";
-  celdas.rows[8].cells[5].style =
     "background-image: url(./img/ReinaB.png); background-size: cover;";
+  celdas.rows[8].cells[5].style =
+    "background-image: url(./img/ReyB.png); background-size: cover;";
   celdas.rows[8].cells[6].style =
     "background-image: url(./img/AlfilB.png); background-size: cover;";
   celdas.rows[8].cells[7].style =
@@ -124,7 +124,39 @@ function pasoAPaso() {
     // alert(lineas[i]);
     var tokens = lineas[i].split(" ");
     for (let j = 1; j < tokens.length; j++) {
-      alert(tokens[j]);
+      // console.log(tokens[j]);
+      var posicion = tokens[j].split(/(\d+)/);
+      console.log('Columna ' + convertirLetra(posicion[0]) + ' Renglon ' + posicion[1])
+      
     }
+  }
+}
+
+function convertirLetra(letra) {
+  switch (letra) {
+    case "a":
+      return 0;
+      break;
+    case "b":
+      return 1;
+      break;
+    case "c":
+      return 2;
+      break;
+    case "d":
+      return 3;
+      break;
+    case "e":
+      return 4;
+      break;
+    case "f":
+      return 5;
+      break;
+    case "g":
+      return 6;
+      break;
+    case "h":
+      return 7;
+      break;
   }
 }
