@@ -101,7 +101,13 @@ function cargarPartida() {
   scanner.readAsText(archivo);
 }
 
-function pasoAPaso() {
+var turnoBlancas = true;
+
+function cambiarTurno() {
+  turnoBlancas = !turnoBlancas;
+}
+
+async function pasoAPaso() {
   var celdas = document.getElementById("texto").value;
 
   // celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
@@ -118,18 +124,40 @@ function pasoAPaso() {
   // }
   // contadorPaso++;
   // console.log(contadorPaso);
-
+  var tabla = document.getElementById("Tablero");
   var lineas = celdas.split("\n");
   for (let i = 0; i < lineas.length; i++) {
     // alert(lineas[i]);
     var tokens = lineas[i].split(" ");
     for (let j = 1; j < tokens.length; j++) {
       // console.log(tokens[j]);
+      if (!tieneMayusculas(tokens[j])) {
+      }
       var posicion = tokens[j].split(/(\d+)/);
-      console.log('Columna ' + convertirLetra(posicion[0]) + ' Renglon ' + posicion[1])
-      
+      console.log(
+        "Columna " + convertirLetra(posicion[0]) + " Renglon " + posicion[1]
+      );
+      var columna = parseInt(convertirLetra(posicion[0]));
+      var renglon = parseInt(posicion[1]);
+      // CAMBIO DE PIEZA uwu
+      tabla.rows[renglon].cells[columna].style =
+        "background-image: url(./img/PeonN.png); background-size:cover;";
+
+      //DELAY
+      console.log(turnoBlancas);
+      cambiarTurno();
+
+      await delay(1000);
     }
   }
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function tieneMayusculas(cadena) {
+  return /[A-Z]/.test(cadena);
 }
 
 function convertirLetra(letra) {
