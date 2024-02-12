@@ -1,0 +1,112 @@
+table {
+    border-collapse: collapse;
+    /*definimos el color de la linea*/
+    border: 1px solid;
+    border-top: none;
+    border: none;
+    display: inline;
+}
+
+tr {
+    height: 75px;
+}
+
+
+tr:nth-child(even) td:nth-child(even),
+tr:nth-child(odd) td:nth-child(odd) {
+    background: rgb(94, 99, 71);
+}
+
+
+
+tr:nth-child(odd) td:nth-child(even),
+tr:nth-child(even) td:nth-child(odd) {
+    background: rgb(101, 65, 65);
+}
+
+td {
+    border: 1px solid;
+    width: 75px;
+}
+
+table tr:first-child td {
+    background-color: rgb(255, 255, 255) !important ;
+    border: none;
+    border-left: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+table tr:last-child td {
+    background-color: rgb(255, 255, 255) !important ;
+    border: none;
+    border-left: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+table td:first-child tr{
+    background-color: rgb(255, 255, 255) !important ;
+    border: none;
+    border-left: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+table td:first-child  {
+    background: #ffffff !important ;
+    border: none;
+    border-left: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+table td:last-child  {
+    background: #ffffff !important ;
+    border: none;
+    border-left: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+div{
+    display: inline;
+}
+
+select{
+    font-size: 2em;
+}
+
+textarea{
+    left: 800px;
+    position: absolute;
+    margin-top: 150px;
+    font-size: 2em;
+    resize: none;
+}
+
+.button1{
+    font-size: 2em;
+    position: absolute;
+    margin-top: 650px;
+    left: 800px;
+}
+
+.button2{
+    font-size: 2em;
+    position: absolute;
+    margin-top: 650px;
+    left: 1000px;
+}
+
+.button3{
+    font-size: 2em;
+    position: absolute;
+    margin-top: 650px;
+    left: 1155px;
+}
