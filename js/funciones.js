@@ -1,4 +1,7 @@
 var contadorPaso = 0;
+var turno = true;
+var i = 0;
+var j = 1;
 
 function iniciar() {
   var celdas = document.getElementById("Tablero");
@@ -101,55 +104,102 @@ function cargarPartida() {
   scanner.readAsText(archivo);
 }
 
-var turnoBlancas = true;
-
-function cambiarTurno() {
-  turnoBlancas = !turnoBlancas;
-}
-
 async function pasoAPaso() {
   var celdas = document.getElementById("texto").value;
-
-  // celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
-  // celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-  // switch(contadorPaso){
-  //   case 0:
-  //     celdas.rows[2].cells[1].style = "background-image: none; background-size:cover;";
-  //     celdas.rows[3].cells[1].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-  //     break;
-  //   case 1:
-  //     celdas.rows[2].cells[2].style = "background-image: none; background-size:cover;";
-  //     celdas.rows[3].cells[2].style = "background-image: url(./img/PeonN.png); background-size:cover;";
-  //     break;
-  // }
-  // contadorPaso++;
-  // console.log(contadorPaso);
   var tabla = document.getElementById("Tablero");
   var lineas = celdas.split("\n");
+  var tokens = lineas[i].split(" ");
+
+  if (turno) {
+    j = 1;
+  } else {
+    j = 2;
+  }
+
+  console.log(tokens[j]);
+  if (!tieneMayusculas(tokens[j])) {
+    var posicion = tokens[j].split(/(\d+)/);
+    console.log(
+      "Columna " + convertirLetra(posicion[0]) + " Renglon " + posicion[1]
+    );
+    var columna = parseInt(convertirLetra(posicion[0]));
+    var renglon = parseInt(posicion[1]);
+
+    if (turno) {
+      tabla.rows[renglon + 1].cells[columna + 1].style =
+        "background-image: url(./img/PeonB.png); background-size:cover;";
+    } else {
+      tabla.rows[renglon - 1].cells[columna + 1].style =
+        "background-image: url(./img/PeonN.png); background-size:cover;";
+    }
+  } else {
+    //console.log("Tokens antes de la division: " + tokens[j]);
+    var posicion = tokens[j].split(/([a-zA-Z])(\d+)/);
+    //console.log("Tokens después de la division: " + posicion[0]);
+
+    console.log(
+      "Columna " + convertirLetra(posicion[1]) + " Renglon " + posicion[2]
+    );
+    var columna = parseInt(convertirLetra(posicion[1]));
+    var renglon = parseInt(posicion[2]);
+
+    if (turno) {
+      tabla.rows[renglon + 1].cells[columna + 1].style =
+        "background-image: url(./img/PeonB.png); background-size:cover;";
+    } else {
+      tabla.rows[renglon - 1].cells[columna + 1].style =
+        "background-image: url(./img/PeonN.png); background-size:cover;";
+    }
+  }
+
+  console.log(turno);
+  if (turno == false) i++;
+  cambiarTurno();
+  document.getElementById("turno").innerHTML =
+    "Turno de las " + (turno ? "Blancas" : "Negras") + renglon + " " + columna;
+
+  //console.log("Estamos en el renglon: " + i + " Y la columna: " + j);
+  //console.log(tokens[j]);
+}
+
+async function partidaCompleta() {
+  var celdas = document.getElementById("texto").value;
+  var tabla = document.getElementById("Tablero");
+  var lineas = celdas.split("\n");
+
   for (let i = 0; i < lineas.length; i++) {
     // alert(lineas[i]);
     var tokens = lineas[i].split(" ");
     for (let j = 1; j < tokens.length; j++) {
       // console.log(tokens[j]);
       if (!tieneMayusculas(tokens[j])) {
+        var posicion = tokens[j].split(/(\d+)/);
+        console.log(
+          "Columna " + convertirLetra(posicion[0]) + " Renglon " + posicion[1]
+        );
+        var columna = parseInt(convertirLetra(posicion[0]));
+        var renglon = parseInt(posicion[1]);
+        if (turno) {
+          tabla.rows[renglon + 1].cells[columna + 1].style =
+            "background-image: url(./img/PeonB.png); background-size:cover;";
+        } else {
+          tabla.rows[renglon - 1].cells[columna + 1].style =
+            "background-image: url(./img/PeonN.png); background-size:cover;";
+        }
+
+        //DELAY
+        console.log(turno);
+        cambiarTurno();
+        document.getElementById("turno").innerHTML =
+          "Turno de las " + (turno ? "Blancas" : "Negras") + renglon + columna;
+        await delay(3000);
       }
-      var posicion = tokens[j].split(/(\d+)/);
-      console.log(
-        "Columna " + convertirLetra(posicion[0]) + " Renglon " + posicion[1]
-      );
-      var columna = parseInt(convertirLetra(posicion[0]));
-      var renglon = parseInt(posicion[1]);
-      // CAMBIO DE PIEZA uwu
-      tabla.rows[renglon].cells[columna].style =
-        "background-image: url(./img/PeonN.png); background-size:cover;";
-
-      //DELAY
-      console.log(turnoBlancas);
-      cambiarTurno();
-
-      await delay(1000);
     }
   }
+}
+
+function cambiarTurno() {
+  turno = !turno;
 }
 
 function delay(ms) {

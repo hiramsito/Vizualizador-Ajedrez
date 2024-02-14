@@ -1,3 +1,7 @@
+*{
+  background-color: darkgrey;
+}
+
 table {
   border-collapse: collapse;
   display: inline;
