@@ -1,7 +1,11 @@
-var contadorPaso = 0;
 var turno = true;
 var i = 0;
-var j = 1;
+var texto = "";
+var noNums = "";
+var tokens = "";
+var salida = "";
+
+
 
 function iniciar() {
   var celdas = document.getElementById("Tablero");
@@ -98,65 +102,105 @@ function cargarPartida() {
 
   scanner.onload = function (e) {
     document.getElementById("texto").value = e.target.result;
-    // document.getElementById("texto").value = document.getElementById("cargarBoton").files;
+    texto = document.getElementById("texto").value;
+    //console.log(texto);
+
+    noNums = texto.replace(/\d+\.\s*/g, "");
+    //console.log(noNums);
+
+    tokens = noNums.split(/\s+/);
+
+    if (tokens && tokens.length > 0) {
+      for (let i = 0; i < tokens.length; i++) {
+        salida += tokens[i] + "\n";
+      }
+      //console.log(salida);
+    } else {
+      console.log("La variable tokens está vacía o no está definida.");
+    }
   };
 
   scanner.readAsText(archivo);
 }
 
-async function pasoAPaso() {
-  var celdas = document.getElementById("texto").value;
+function pasoAPaso() {
   var tabla = document.getElementById("Tablero");
-  var lineas = celdas.split("\n");
-  var tokens = lineas[i].split(" ");
+  console.log(tokens[i]);
 
-  if (turno) {
-    j = 1;
-  } else {
-    j = 2;
-  }
-
-  console.log(tokens[j]);
-  if (!tieneMayusculas(tokens[j])) {
-    var posicion = tokens[j].split(/(\d+)/);
-    console.log(
-      "Columna " + convertirLetra(posicion[0]) + " Renglon " + posicion[1]
-    );
-    var columna = parseInt(convertirLetra(posicion[0]));
-    var renglon = parseInt(posicion[1]);
-
-    if (turno) {
-      tabla.rows[renglon + 1].cells[columna + 1].style =
-        "background-image: url(./img/PeonB.png); background-size:cover;";
-    } else {
-      tabla.rows[renglon - 1].cells[columna + 1].style =
-        "background-image: url(./img/PeonN.png); background-size:cover;";
-    }
-  } else {
-    //console.log("Tokens antes de la division: " + tokens[j]);
-    var posicion = tokens[j].split(/([a-zA-Z])(\d+)/);
-    //console.log("Tokens después de la division: " + posicion[0]);
-
-    console.log(
-      "Columna " + convertirLetra(posicion[1]) + " Renglon " + posicion[2]
-    );
+  if (!tieneMayusculas(tokens[i])) {
+    var posicion = tokens[i].split(/([a-zA-Z])(\d+)/);
+    console.log(posicion);
     var columna = parseInt(convertirLetra(posicion[1]));
-    var renglon = parseInt(posicion[2]);
-
+    var renglon = parseInt(convertirNumero(posicion[2]));
+    console.log(
+      "Estoy en la columna: " + columna + " Y estoy en el renglon: " + renglon
+    );
     if (turno) {
-      tabla.rows[renglon + 1].cells[columna + 1].style =
+      tabla.rows[renglon].cells[columna].style =
         "background-image: url(./img/PeonB.png); background-size:cover;";
     } else {
-      tabla.rows[renglon - 1].cells[columna + 1].style =
+      tabla.rows[renglon].cells[columna].style =
+        "background-image: url(./img/PeonN.png); background-size:cover;";
+    }
+  } else {
+    var posicion = tokens[i].split(/([a-zA-Z])(\d+)/);
+    console.log(posicion);
+    var columna = parseInt(convertirLetra(posicion[1]));
+    var renglon = parseInt(convertirNumero(posicion[2]));
+    console.log(
+      "Estoy en la columna: " + columna + " Y estoy en el renglon: " + renglon
+    );
+    if (turno) {
+      tabla.rows[renglon].cells[columna].style =
+        "background-image: url(./img/PeonB.png); background-size:cover;";
+    } else {
+      tabla.rows[renglon].cells[columna].style =
         "background-image: url(./img/PeonN.png); background-size:cover;";
     }
   }
 
-  console.log(turno);
-  if (turno == false) i++;
-  cambiarTurno();
   document.getElementById("turno").innerHTML =
-    "Turno de las " + (turno ? "Blancas" : "Negras") + renglon + " " + columna;
+    "Movimiento: " +
+    (i + 1) +
+    " Turno " +
+    (turno == true ? "blancas " : " negras ") +
+    tokens[i++];
+  turno = !turno;
+
+  // if (!tieneMayusculas(tokens[j])) {
+  //   var posicion = tokens[j].split(/(\d+)/);
+  //   console.log(
+  //     "Columna " + convertirLetra(posicion[0]) + " Renglon " + posicion[1]
+  //   );
+  //   var columna = parseInt(convertirLetra(posicion[0]));
+  //   var renglon = parseInt(posicion[1]);
+
+  //   if (turno) {
+  //     tabla.rows[renglon + 1].cells[columna + 1].style =
+  //       "background-image: url(./img/PeonB.png); background-size:cover;";
+  //   } else {
+  //     tabla.rows[renglon - 1].cells[columna + 1].style =
+  //       "background-image: url(./img/PeonN.png); background-size:cover;";
+  //   }
+  // } else {
+  //   //console.log("Tokens antes de la division: " + tokens[j]);
+  //   var posicion = tokens[j].split(/([a-zA-Z])(\d+)/);
+  //   //console.log("Tokens después de la division: " + posicion[0]);
+
+  //   console.log(
+  //     "Columna " + convertirLetra(posicion[1]) + " Renglon " + posicion[2]
+  //   );
+  //   var columna = parseInt(convertirLetra(posicion[1]));
+  //   var renglon = parseInt(posicion[2]);
+
+  //   if (turno) {
+  //     tabla.rows[renglon + 1].cells[columna + 1].style =
+  //       "background-image: url(./img/PeonB.png); background-size:cover;";
+  //   } else {
+  //     tabla.rows[renglon - 1].cells[columna + 1].style =
+  //       "background-image: url(./img/PeonN.png); background-size:cover;";
+  //   }
+  // }
 
   //console.log("Estamos en el renglon: " + i + " Y la columna: " + j);
   //console.log(tokens[j]);
@@ -213,28 +257,57 @@ function tieneMayusculas(cadena) {
 function convertirLetra(letra) {
   switch (letra) {
     case "a":
-      return 0;
-      break;
-    case "b":
       return 1;
       break;
-    case "c":
+    case "b":
       return 2;
       break;
-    case "d":
+    case "c":
       return 3;
       break;
-    case "e":
+    case "d":
       return 4;
       break;
-    case "f":
+    case "e":
       return 5;
       break;
-    case "g":
+    case "f":
       return 6;
       break;
-    case "h":
+    case "g":
       return 7;
+      break;
+    case "h":
+      return 8;
+      break;
+  }
+}
+
+function convertirNumero(numero) {
+  switch (numero) {
+    case "1":
+      return 8;
+      break;
+    case "2":
+      return 7;
+      break;
+    case "3":
+      return 6;
+      break;
+    case "4":
+      return 5;
+      break;
+    case "5":
+      return 4;
+      break;
+    case "6":
+      return 3;
+      break;
+    case "7":
+      return 2;
+      break;
+    case "8":
+      return 1;
       break;
   }
 }
