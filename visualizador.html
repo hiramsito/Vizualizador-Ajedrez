@@ -151,13 +151,42 @@
           </select>
         </div>
         <div class="textArea">
-          <textarea name="" class="texto" id="texto" cols="70" rows="25" disabled></textarea>
+          <textarea name="" id="textarea1" cols="70" rows="25" disabled>
+1. e4 c5
+2. Nf3 Nc6
+3. d4 cxd4
+4. Nxd4 e6
+5. Nc3 a6
+6. Be3 Qc7
+7. Qd2 Nf6
+8. f3 b5
+9. O-O-O Bb7
+10. g4 h6
+11. h4 Rc8
+12. Be2 Ne5
+13. g5 hxg5
+14. hxg5 Rxh1
+15. Rxh1 Ng8
+16. Rh8 Ne7
+17. f4 N5g6
+18. Ncxb5 axb5
+19. Nxb5 Qxc2+
+20. Qxc2 Rxc2+
+21. Kxc2 Nxh8
+22. Nd6+ Kd8
+23. Bb6#
+          </textarea>
         </div>
         <div class="botones">
-          <button class="button1" onclick="pasoAPaso()">Paso a paso</button>
+          <button class="button1" onclick="pasos()">Paso a paso</button>
           <button class="button2">Completo</button>
-          <input type="file" class="button3" value="" id="cargarBoton" onchange="cargarPartida()"></input>
+          <input type="file" class="button3" id="cargarBoton" name="Cargar partida" onchange="cargarPartida()"></input>
           <p ><h1 id = "turno">Turno de las Blancas</h1></p>
+          <h1>
+            <p id="turno">blanco</p>
+      
+            <p id="out"></p>
+          </h1>
         </div>
       </div>
     </div>

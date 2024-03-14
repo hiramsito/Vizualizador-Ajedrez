@@ -89,3 +89,13 @@ select {
   flex-direction: row;
   align-items: center; /* Para centrar horizontalmente en la página */
 }
+
+.move-animation {
+  animation: scaleAnimation 2s ease;
+}
+
+@keyframes scaleAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
